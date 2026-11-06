@@ -3,7 +3,7 @@
     "slug": "guangnianti", "name": "光年梯", "initial": "光", "color": "violet",
     "price": 18, "traffic": 120, "line": "IEPL 专线", "coupon": "GNT80",
     "url": "https://Rumors.gntaff.com/#/?code=Mclks3w5",
-    "featured": true, "label": "本站主推",
+    "featured": true, "label": "本站主推", "recommendationRank": 1,
     "summary": "同为 18 元月付，多 20GB 流量。适合希望兼顾专线与日常流量预算的用户。",
     "advantages": ["¥18/月，120GB 流量", "IEPL 专线方案", "同价位流量比 100GB 多 20%", "提供优惠码 GNT80"],
     "unknown": "节点地区、协议、倍率、设备数、退款政策及实际解锁表现待核实。"
@@ -12,7 +12,7 @@
     "slug": "shunyun", "name": "瞬云", "initial": "瞬", "color": "blue",
     "price": 18, "traffic": 100, "line": "IPLC 专线", "coupon": "20OFF",
     "url": "https://ddd.jichang.best/#/register?code=SWAVvMOV",
-    "featured": false, "label": "IPLC 选择",
+    "featured": false, "label": "IPLC 选择", "recommendationRank": 3,
     "summary": "18 元月付、100GB 流量，适合希望比较 IPLC 线路方案的用户。",
     "advantages": ["¥18/月，100GB 流量", "IPLC 专线方案", "提供优惠码 20OFF"],
     "unknown": "线路实际表现、协议、倍率、设备数与优惠适用范围待核实。"
@@ -21,7 +21,7 @@
     "slug": "yuntu", "name": "云图", "initial": "云", "color": "teal",
     "price": 18, "traffic": 100, "line": "IEPL 专线", "coupon": "yt88",
     "url": "https://super.ytjcok.org/#/register?code=COsTypDq",
-    "featured": false, "label": "IEPL 备选",
+    "featured": false, "label": "IEPL 备选", "recommendationRank": 2,
     "summary": "18 元月付、100GB 流量，为 IEPL 专线用户提供另一种比较选择。",
     "advantages": ["¥18/月，100GB 流量", "IEPL 专线方案", "提供优惠码 yt88"],
     "unknown": "节点地区、协议、设备数、倍率及高峰表现待核实。"
@@ -30,7 +30,7 @@
     "slug": "kunpeng", "name": "鲲鹏加速", "initial": "鲲", "color": "amber",
     "price": 12, "traffic": null, "line": "直连线路", "coupon": null,
     "url": "https://kunpengjiasu.com/#/register?code=Yd7XpCEQ",
-    "featured": false, "label": "低预算选择",
+    "featured": false, "label": "低预算选择", "recommendationRank": 4,
     "summary": "12 元月付的直连机场，入门成本较低，适合先用小预算验证本地网络。",
     "advantages": ["¥12/月，入门成本低", "直连线路方案", "比 18 元月付少 6 元"],
     "unknown": "流量额度未提供，暂无优惠码；节点地区、倍率及设备限制待核实。"
