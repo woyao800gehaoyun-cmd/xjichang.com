@@ -1,0 +1,12 @@
+[
+  { "question": "这四家机场里，为什么主推光年梯？", "answer": "本站主推依据是已提供的套餐：光年梯 18 元/月、120GB、IEPL。同为 18 元月付，标称流量比瞬云与云图的 100GB 多 20%。这不是实测速度排名。", "href": "/posts/guangnianti-review/" },
+  { "question": "机场优惠码有哪些，能打几折？", "answer": "光年梯 GNT80、瞬云 20OFF、云图 yt88，鲲鹏加速暂无。优惠比例、有效期、适用套餐和续费资格尚未确认，最终以结算页实际减免为准。", "href": "/posts/coupons-pricing/" },
+  { "question": "机场订阅链接是什么，能分享吗？", "answer": "订阅链接是客户端获取配置与节点的地址，通常带账户权限。不要公开分享，泄露后应在服务商面板重置，再更新所有设备。", "href": "/posts/subscription-import/" },
+  { "question": "机场订阅失败或节点不显示怎么办？", "answer": "检查链接完整性、订阅格式、客户端版本、账号到期和流量状态，再用另一条网络测试入口。不要在公开截图中显示完整订阅地址。", "href": "/posts/subscription-fail/" },
+  { "question": "机场连上了但打不开网页是什么原因？", "answer": "检查系统代理、DNS、分流规则和节点，短暂切换全局模式作对照，再切换网络；只有单个网站失败时，还要考虑平台限制。", "href": "/posts/connection-fail/" },
+  { "question": "专线机场一定比直连更稳定吗？", "answer": "不能只凭线路名称判断。入口、出口、运营商、负载与本地网络都会影响表现，应该在常用网络和晚高峰测试。", "href": "/posts/iplc-iepl-transit/" },
+  { "question": "机场节点倍率怎么算？", "answer": "一般可用实际流量乘节点倍率估算扣量，例如 10GB 在 2x 节点约计 20GB；上传是否计入与具体规则以服务商为准。", "href": "/posts/traffic-multiplier/" },
+  { "question": "有没有免费试用，鲲鹏加速有多少流量？", "answer": "本站尚未收到四家品牌的免费试用规则。鲲鹏加速已提供 12 元月付直连方案，流量额度待确认，购买前要向服务商核实。", "href": "/posts/trial-beginner/" },
+  { "question": "机场可以保证 ChatGPT、Netflix 或 TikTok 可用吗？", "answer": "本站未进行四家品牌的相关测试，无法作保证。能打开网页、出口地区和平台是否允许使用，需要按账号、节点和平台条款分别确认。", "href": "/posts/ai-airport/" },
+  { "question": "如何判断机场跑路，而不是临时故障？", "answer": "一次连不上不足以判断。应交叉检查面板、订阅、不同网络、正式公告和客服响应，保留时间与错误记录，在情况不明时暂停续费。", "href": "/posts/reliability-risk/" }
+]
