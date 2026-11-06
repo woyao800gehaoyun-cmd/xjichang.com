@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 const root = path.join(process.cwd(), 'dist');
 const basePath = (process.env.BASE_PATH || '').replace(/\/$/, '');
-const mustExist = ['index.html', 'brands/index.html', 'compare/index.html', 'posts/index.html', 'topics/index.html', 'tools/index.html', 'questions/index.html', 'alerts/index.html', 'sitemap.xml', 'sitemap-index.xml', 'robots.txt', 'rss.xml', 'llms.txt', 'search-index.json', 'og-default.png', 'styles.css', 'app.js', 'theme.js', '404.html'];
+const mustExist = ['index.html', 'brands/index.html', 'compare/index.html', 'posts/index.html', 'topics/index.html', 'tools/index.html', 'questions/index.html', 'alerts/index.html', 'sitemap.xml', 'sitemap-index.xml', 'robots.txt', 'rss.xml', 'llms.txt', 'search-index.json', 'search-index.js', 'og-default.png', 'styles.css', 'app.js', 'theme.js', '404.html'];
 const missing = [];
 for (const file of mustExist) { try { await fs.access(path.join(root, file)); } catch { missing.push(file); } }
 const html = await fs.readFile(path.join(root, 'index.html'), 'utf8');
@@ -22,8 +22,10 @@ for (const [entry, document] of documents) {
   for (const block of document.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)) { try { JSON.parse(block[1]); } catch { missing.push(`jsonld:${entry}`); } }
   for (const match of document.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = match[1].replaceAll('&amp;', '&');
-    if (!url.startsWith('/') && !url.startsWith('#')) continue;
-    const [prefixedPath, anchor] = url.split('#');
+    const resolved = new URL(url, `https://verify.invalid${basePath}/${entry}`);
+    if (resolved.origin !== 'https://verify.invalid') continue;
+    const prefixedPath = decodeURIComponent(resolved.pathname);
+    const anchor = resolved.hash.slice(1);
     const pathname = basePath && prefixedPath.startsWith(`${basePath}/`) ? prefixedPath.slice(basePath.length) : prefixedPath;
     const target = pathname ? (pathname.endsWith('/') ? `${pathname.slice(1)}index.html` : pathname.slice(1)) : entry;
     try { const stat = await fs.stat(path.join(root, target)); if (!stat.isFile()) missing.push(`non-file:${entry}:${url}`); } catch { missing.push(`broken:${entry}:${url}`); }
@@ -31,6 +33,8 @@ for (const [entry, document] of documents) {
   }
 }
 const search = JSON.parse(await fs.readFile(path.join(root, 'search-index.json'), 'utf8'));
+const localSearch = await fs.readFile(path.join(root, 'search-index.js'), 'utf8');
+if (localSearch !== `window.XJICHANG_SEARCH_INDEX = ${await fs.readFile(path.join(root, 'search-index.json'), 'utf8')};\n`) missing.push('local-search-mismatch');
 if (search.length !== sourceCount) missing.push(`search-count:${search.length}/${sourceCount}`);
 const sitemap = await fs.readFile(path.join(root, 'sitemap.xml'), 'utf8');
 for (const entry of documents.keys()) if (entry !== '404.html') { const url = `https://xjichang.com/${entry.replace(/index\.html$/, '')}`; if (!sitemap.includes(`<loc>${url}</loc>`)) missing.push(`sitemap-missing:${entry}`); }

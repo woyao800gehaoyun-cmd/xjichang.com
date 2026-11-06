@@ -4,6 +4,8 @@
 
 ## 本地运行
 
+直接预览已经生成的博客：双击项目根目录的 `index.html`，或打开 `dist/index.html`。样式、图片、搜索、工具与文章跳转均支持本地文件打开；请保留整个 `dist/` 文件夹，不要只复制其中一个 HTML。修改源内容后需要重新构建，才能在 `dist/` 看到更新。
+
 需要 Node.js 22 或更新版本，GitHub Actions 使用 Node.js 24。
 
 ```sh
@@ -32,7 +34,7 @@ npm run new:post -- article-slug "文章标题"
 
 目前 SEO 正式地址配置为 `https://xjichang.com`。GitHub 仓库的 **Settings → Pages → Source** 应选择 **GitHub Actions**。如要在该域名上线，还需在 Pages 中设置自定义域名，并将域名 DNS 指向 GitHub Pages。域名未完成绑定前，不能把构建成功等同于正式域名上线。
 
-工作流会读取 Pages 配置并自动使用正确的资源路径，因此 GitHub 项目路径可用于临时预览；绑定自定义域名后下次构建会自动切换到根路径。正式 canonical 和站点地图仍指向 `https://xjichang.com`，应完成域名绑定后再提交搜索引擎。静态产物在 `dist/`。其他主机部署到子路径时可用 `BASE_PATH` 指定路径。
+HTML 内的资源和内部链接按页面层级生成相对路径，兼容本地文件、正式域名和 GitHub 项目路径。工作流仍会读取 Pages 配置，使用 `BASE_PATH` 生成在线搜索索引地址。正式 canonical 和站点地图仍指向 `https://xjichang.com`，应完成域名绑定后再提交搜索引擎。静态产物在 `dist/`。其他主机部署到子路径时可用 `BASE_PATH` 指定路径。
 
 ## SEO 与 GEO
 

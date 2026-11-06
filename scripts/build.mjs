@@ -6,7 +6,18 @@ import { marked } from 'marked';
 const root = process.cwd();
 const basePath = (process.env.BASE_PATH || '').replace(/\/$/, '');
 if (basePath && !/^\/[a-zA-Z0-9._/-]+$/.test(basePath)) throw new Error('Invalid BASE_PATH');
-const withBase = (html) => html.replace('src="/app.js"', 'src="/app.js" data-base-path="' + basePath + '"').replace(/(href|src)="\/(?!\/)/g, `$1="${basePath}/`);
+function relativeDocument(html, currentRoute) {
+  const currentFile = currentRoute.endsWith('/') ? `${currentRoute.slice(1)}index.html` : currentRoute.slice(1);
+  const directory = path.posix.dirname(currentFile);
+  return html.replace('src="/app.js"', 'src="/app.js" data-base-path="' + basePath + '"').replace(/(href|src)="\/(?!\/)([^"]*)"/g, (match, attribute, value) => {
+    const [, pathname, suffix] = value.match(/^([^?#]*)(.*)$/);
+    let relative = path.posix.relative(directory, pathname || '.');
+    if (!relative) relative = '.';
+    if ((!pathname || pathname.endsWith('/')) && !relative.endsWith('/')) relative += '/';
+    if (!relative.startsWith('.')) relative = `./${relative}`;
+    return `${attribute}="${relative}${suffix}"`;
+  });
+}
 const out = path.join(root, 'dist');
 // Only remove generated output inside this repository, so removed articles cannot linger.
 if (path.relative(root, out) !== 'dist') throw new Error('Unexpected build directory');
@@ -76,7 +87,7 @@ async function writePage(url, html) {
     try { const stat = await fs.stat(file); if (stat.isDirectory()) await fs.rm(file, { recursive: true, force: true }); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
   await fs.mkdir(path.dirname(file), { recursive: true });
-  await fs.writeFile(file, withBase(html));
+  await fs.writeFile(file, relativeDocument(html, url));
 }
 
 const latest = posts.slice(0, 5);
@@ -144,7 +155,9 @@ await fs.writeFile(path.join(out, 'sitemap.xml'), `<?xml version="1.0" encoding=
 await fs.writeFile(path.join(out, 'sitemap-index.xml'), `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>${site.url}/sitemap.xml</loc></sitemap></sitemapindex>`);
 await fs.writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
 await fs.cp(publicDir, out, { recursive: true });
-await fs.writeFile(path.join(out, 'search-index.json'), json(posts.map((post) => ({ title: post.title, url: `${basePath}/posts/${post.slug}/`, description: post.description, tags: post.tags || [], text: post.body.replace(/[#*\[\]()>|]/g, '').slice(0, 2500) }))));
+const searchIndex = json(posts.map((post) => ({ title: post.title, url: `${basePath}/posts/${post.slug}/`, description: post.description, tags: post.tags || [], text: post.body.replace(/[#*\[\]()>|]/g, '').slice(0, 2500) })));
+await fs.writeFile(path.join(out, 'search-index.json'), searchIndex);
+await fs.writeFile(path.join(out, 'search-index.js'), `window.XJICHANG_SEARCH_INDEX = ${searchIndex};\n`);
 await fs.writeFile(path.join(out, 'llms.txt'), `# ${site.name}\n\n> ${site.description}\n\n## 信息边界\n\n资料整理日期：${site.reviewedAt}。本站根据站方提供的套餐参数做配置分析；未验证测速、解锁、在线率、节点覆盖、协议、设备数与日志政策。推广链接可能带来佣金。\n\n## 品牌\n\n${brands.map((brand) => `- [${brand.name}](${route(`/posts/${brand.slug}-review/`)}): ¥${brand.price}/月，${brand.traffic ? `${brand.traffic}GB` : '流量未提供'}，${brand.line}，优惠码 ${brand.coupon || '暂无'}。`).join('\n')}\n\n## 阅读入口\n\n- [问题库](${route('/questions/')})\n- [文章库](${route('/posts/')})\n- [关于与资料来源](${route('/about/')})\n\nllms.txt 是便于读取的内容索引，不代表任何模型必须抓取、引用或给予排名。\n`);
-await fs.writeFile(path.join(out, '404.html'), withBase(shell({ title: '页面未找到', description: '此页面可能已移动，请返回文章库或使用搜索。', path: '/404.html', noindex: true, body: '<section class="section"><div class="container narrow"><h1>404 · 页面未找到</h1><p>试试全站搜索，或从文章库重新开始。</p><a class="button button-primary" href="/posts/">浏览文章 →</a></div></section>' })));
+await fs.writeFile(path.join(out, '404.html'), relativeDocument(shell({ title: '页面未找到', description: '此页面可能已移动，请返回文章库或使用搜索。', path: '/404.html', noindex: true, body: '<section class="section"><div class="container narrow"><h1>404 · 页面未找到</h1><p>试试全站搜索，或从文章库重新开始。</p><a class="button button-primary" href="/posts/">浏览文章 →</a></div></section>' }), '/404.html'));
 console.log(`Built ${urls.length} routes into ${out}`);

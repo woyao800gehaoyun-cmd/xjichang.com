@@ -1,5 +1,22 @@
 (() => {
   const basePath = document.querySelector('script[data-base-path]')?.dataset.basePath || '';
+  const siteRoot = new URL('./', document.currentScript.src);
+  const localFile = location.protocol === 'file:';
+  function localHref(value, sitePath = false) {
+    if (sitePath) {
+      if (basePath && value.startsWith(`${basePath}/`)) value = value.slice(basePath.length);
+      value = new URL(value.replace(/^\//, ''), siteRoot).href;
+    }
+    const target = new URL(value, location.href);
+    if (target.protocol === 'file:' && target.pathname.endsWith('/')) target.pathname += 'index.html';
+    return target.href;
+  }
+  if (localFile) {
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href.startsWith('#') && new URL(href, location.href).protocol === 'file:') link.href = localHref(href);
+    });
+  }
   const menu = document.querySelector('[data-mobile-menu]');
   const menuButton = document.querySelector('[data-menu-open]');
   menuButton?.addEventListener('click', () => { const open = menu?.classList.toggle('is-open'); menuButton.setAttribute('aria-expanded', String(Boolean(open))); });
@@ -12,7 +29,17 @@
   const results = document.querySelector('[data-search-results]');
   let pages = [], returnFocus, loading;
   async function loadSearch() {
-    if (!loading) loading = fetch(`${basePath}/search-index.json`).then((response) => { if (!response.ok) throw new Error('search unavailable'); return response.json(); }).then((data) => { pages = data; });
+    if (!loading) {
+      const data = localFile ? new Promise((resolve, reject) => {
+        if (Array.isArray(window.XJICHANG_SEARCH_INDEX)) { resolve(window.XJICHANG_SEARCH_INDEX); return; }
+        const script = document.createElement('script');
+        script.src = new URL('search-index.js', siteRoot).href;
+        script.onload = () => { if (Array.isArray(window.XJICHANG_SEARCH_INDEX)) resolve(window.XJICHANG_SEARCH_INDEX); else reject(new Error('Invalid search index')); };
+        script.onerror = () => { script.remove(); reject(new Error('Search index unavailable')); };
+        document.head.append(script);
+      }) : fetch(new URL('search-index.json', siteRoot)).then((response) => { if (!response.ok) throw new Error('search unavailable'); return response.json(); });
+      loading = data.then((data) => { pages = data; });
+    }
     try { await loading; render(input?.value || ''); } catch { if (results) results.textContent = '暂时无法加载搜索，请进入文章库查阅。'; loading = null; }
   }
   const open = () => { if (!modal) return; returnFocus = document.activeElement; modal.classList.add('is-open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; input?.focus(); if (results) results.textContent = '正在加载文章索引…'; loadSearch(); };
@@ -34,7 +61,7 @@
     const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
     const matches = pages.map((page) => { const title = `${page.title} ${page.tags.join(' ')}`.toLowerCase(); const text = `${title} ${page.description} ${page.text}`.toLowerCase(); return { ...page, score: words.every((word) => text.includes(word)) ? words.reduce((sum, word) => sum + (title.includes(word) ? 3 : 1), 1) : 0 }; }).filter((page) => page.score).sort((a, b) => b.score - a.score).slice(0, 8);
     results.replaceChildren();
-    for (const page of matches) { const link = document.createElement('a'); link.className = 'search-result'; link.href = page.url; const title = document.createElement('strong'); title.textContent = page.title; const detail = document.createElement('small'); detail.textContent = page.description; link.append(title, detail); results.append(link); }
+    for (const page of matches) { const link = document.createElement('a'); link.className = 'search-result'; link.href = localFile ? localHref(page.url, true) : page.url; const title = document.createElement('strong'); title.textContent = page.title; const detail = document.createElement('small'); detail.textContent = page.description; link.append(title, detail); results.append(link); }
     if (!matches.length) results.textContent = '没有找到匹配内容，试试“IPLC”“Clash”或“光年梯”。';
   }
   input?.addEventListener('input', (event) => render(event.target.value));
