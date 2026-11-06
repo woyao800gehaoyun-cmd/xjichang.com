@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+  <title id="title">发现更多好机场</title>
+  <desc id="desc">以地球、网络节点与服务器连接线呈现机场导航主题，不代表任何品牌的实际节点覆盖。</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop stop-color="#191b40"/>
+      <stop offset=".55" stop-color="#403195"/>
+      <stop offset="1" stop-color="#176c8e"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop stop-color="#9d8aff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#9d8aff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="globe" cx=".32" cy=".2" r=".95">
+      <stop stop-color="#9394ed" stop-opacity=".45"/>
+      <stop offset=".55" stop-color="#5863c4" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#132957" stop-opacity=".7"/>
+    </radialGradient>
+    <linearGradient id="rim" x2="1" y2="1">
+      <stop stop-color="#d2d4ff" stop-opacity=".8"/>
+      <stop offset=".5" stop-color="#a0aaff" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#87e5e3" stop-opacity=".65"/>
+    </linearGradient>
+    <linearGradient id="route" x2="1" y2="1">
+      <stop stop-color="#c4baff"/>
+      <stop offset=".55" stop-color="#edf8ff"/>
+      <stop offset="1" stop-color="#70e7d8"/>
+    </linearGradient>
+    <linearGradient id="card" x2="1" y2="1">
+      <stop stop-color="#8484d1" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#363a81" stop-opacity=".65"/>
+    </linearGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#d2dbff" opacity=".12"/>
+    </pattern>
+    <clipPath id="globe-clip"><circle cx="555" cy="355" r="190"/></clipPath>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="620" rx="32" fill="url(#background)"/>
+  <rect width="1000" height="620" rx="32" fill="url(#dots)"/>
+  <circle cx="580" cy="330" r="350" fill="url(#halo)"/>
+  <g fill="none" stroke="#c2c6ff" stroke-opacity=".08">
+    <circle cx="555" cy="355" r="244"/>
+    <circle cx="555" cy="355" r="296"/>
+    <path d="M58 560H942M58 208H942" stroke-dasharray="3 12"/>
+  </g>
+
+  <g font-family="'Microsoft YaHei', 'PingFang SC', sans-serif">
+    <g fill="#b6c9ff" font-size="15" font-weight="600" letter-spacing="3">
+      <path d="M66 51v14m-7-7h14" stroke="#8de5dc" stroke-width="2"/>
+      <text x="85" y="64">AIRPORT NETWORK</text>
+    </g>
+    <text x="62" y="123" fill="#fff" font-size="43" font-weight="700" letter-spacing="1">发现更多好机场</text>
+    <text x="65" y="163" fill="#c4c7ec" font-size="19" letter-spacing="2">从品牌到线路，找到适合你的连接</text>
+  </g>
+
+  <!-- The globe and routes are an editorial illustration, not a coverage map. -->
+  <ellipse cx="555" cy="355" rx="302" ry="104" transform="rotate(-23 555 355)" fill="none" stroke="#b0c0ff" stroke-opacity=".2" stroke-dasharray="5 10"/>
+  <circle cx="555" cy="355" r="190" fill="url(#globe)" stroke="url(#rim)" stroke-width="2"/>
+  <g clip-path="url(#globe-clip)">
+    <g fill="none" stroke="#c0ceff" stroke-opacity=".17" stroke-width="1.2">
+      <ellipse cx="555" cy="355" rx="128" ry="190"/>
+      <ellipse cx="555" cy="355" rx="57" ry="190"/>
+      <ellipse cx="555" cy="355" rx="190" ry="64"/>
+      <ellipse cx="555" cy="355" rx="190" ry="132"/>
+      <path d="M365 355H745M555 165V545"/>
+    </g>
+    <g fill="#a8b6f4" fill-opacity=".2" stroke="#d0d6ff" stroke-opacity=".12" stroke-linejoin="round">
+      <path d="m407 237 35-27 39 3 17 24-15 21-27 4-4 23-24 9-17-20-23-11z"/>
+      <path d="m450 303 31-8 25 20 22 12-2 34-18 17-6 39-17 38-17-17-2-43-15-21 2-29-15-21z"/>
+      <path d="m543 235 29-24 22 4 9 18 41 1 30 22 32 7 29 28-8 25-27 4-15 21-25-10-12 18-26-17-5-25-22-4-14-24-24-1-6-20z"/>
+      <path d="m548 302 31 3 28 21 4 34-18 23-8 37-20 13-16-32-3-31-19-29 6-21z"/>
+      <path d="m645 433 32-18 33 16 5 28-25 13-37-10z"/>
+      <path d="m683 357 12 16-1 24-12-10-6-19z"/>
+    </g>
+    <g fill="none" stroke="url(#route)" stroke-width="2.5">
+      <path d="M430 280Q550 152 666 292"/>
+      <path d="M430 280Q533 424 666 292"/>
+      <path d="M430 280Q555 263 572 393"/>
+      <path d="M572 393Q646 349 678 449"/>
+      <path d="M666 292Q727 365 678 449"/>
+    </g>
+  </g>
+
+  <g fill="none" stroke="url(#route)" stroke-width="2" stroke-linecap="round">
+    <path d="M259 299Q335 239 430 280"/>
+    <path d="M666 292Q751 279 791 392"/>
+    <path d="M572 393Q499 521 346 482" stroke-dasharray="4 8" stroke-opacity=".6"/>
+    <path d="M293 465Q548 557 815 242" stroke-opacity=".5"/>
+  </g>
+  <g fill="#84eee0" opacity=".65" filter="url(#glow)">
+    <circle cx="430" cy="280" r="11"/>
+    <circle cx="666" cy="292" r="11"/>
+    <circle cx="572" cy="393" r="11"/>
+    <circle cx="678" cy="449" r="9"/>
+  </g>
+  <g fill="#d4fff5" stroke="#65dacd" stroke-width="2">
+    <circle cx="430" cy="280" r="6"/>
+    <circle cx="666" cy="292" r="6"/>
+    <circle cx="572" cy="393" r="6"/>
+    <circle cx="678" cy="449" r="5"/>
+  </g>
+  <g fill="none" stroke="#a6e8e1" stroke-opacity=".45">
+    <circle cx="430" cy="280" r="14"/>
+    <circle cx="666" cy="292" r="14"/>
+    <circle cx="572" cy="393" r="14"/>
+  </g>
+
+  <g transform="translate(72 247)">
+    <rect width="196" height="115" rx="18" fill="#242655" fill-opacity=".85"/>
+    <rect width="196" height="115" rx="18" fill="url(#card)" stroke="#a3a9eb" stroke-opacity=".45"/>
+    <rect x="20" y="20" width="38" height="38" rx="12" fill="#a39aff" fill-opacity=".16"/>
+    <g transform="translate(28 28)" fill="none" stroke="#d2caff" stroke-width="1.6" stroke-linejoin="round">
+      <path d="m11 0 11 6-11 6L0 6zM0 11l11 6 11-6M0 16l11 6 11-6"/>
+    </g>
+    <g font-family="'Microsoft YaHei', 'PingFang SC', sans-serif">
+      <text x="72" y="45" fill="#f5f2ff" font-size="20" font-weight="600">机场导航</text>
+      <text x="21" y="88" fill="#bfc7e9" font-size="16">发现 · 了解 · 对比</text>
+    </g>
+  </g>
+
+  <g transform="translate(781 359)">
+    <rect width="157" height="117" rx="18" fill="#214461" fill-opacity=".9"/>
+    <rect width="157" height="117" rx="18" fill="url(#card)" stroke="#a0dcdf" stroke-opacity=".4"/>
+    <g transform="translate(21 19)" fill="none" stroke="#a6eee3" stroke-width="2">
+      <rect width="47" height="17" rx="5"/>
+      <rect y="24" width="47" height="17" rx="5"/>
+      <path d="M10 8.5h12M10 32.5h12"/>
+      <circle cx="36" cy="8.5" r="1.5" fill="#a6eee3" stroke="none"/>
+      <circle cx="36" cy="32.5" r="1.5" fill="#a6eee3" stroke="none"/>
+    </g>
+    <path d="m89 39 7 7 15-17" fill="none" stroke="#c1cbff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="21" y="92" fill="#e0f6f4" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="18">线路与节点</text>
+  </g>
+
+  <g fill="#c6d3f1" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-size="16" letter-spacing="2">
+    <text x="676" y="568">品牌 · 线路 · 测评 · 教程</text>
+  </g>
+  <g fill="#c5cfff">
+    <circle cx="293" cy="465" r="4"/>
+    <circle cx="815" cy="242" r="4"/>
+    <circle cx="346" cy="482" r="3"/>
+    <path d="M908 510v12m-6-6h12M319 206v10m-5-5h10" stroke="#b5c9f6" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>
