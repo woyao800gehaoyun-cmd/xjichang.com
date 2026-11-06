@@ -1,0 +1,10 @@
+[
+  { "slug": "choose", "name": "机场选择", "icon": "compass", "description": "从预算、月付套餐到可靠性，建立自己的选择标准。", "keywords": ["机场推荐", "机场排行", "新手指南"], "color": "violet" },
+  { "slug": "reviews", "name": "品牌测评", "icon": "layers", "description": "逐项拆解四家机场的价格、线路、流量与优惠信息。", "keywords": ["机场测评", "品牌库", "机场怎么样"], "color": "blue" },
+  { "slug": "clients", "name": "客户端教程", "icon": "monitor", "description": "Windows、Mac、Android 和 iOS 的订阅配置与使用方法。", "keywords": ["Clash", "Shadowrocket", "sing-box"], "color": "teal" },
+  { "slug": "network", "name": "线路与协议", "icon": "network", "description": "读懂 IEPL、IPLC、中转、直连、协议与流量倍率。", "keywords": ["专线机场", "节点倍率", "原生 IP"], "color": "amber" },
+  { "slug": "scenes", "name": "使用场景", "icon": "globe", "description": "围绕 AI、流媒体、游戏、远程办公和跨境业务做选择。", "keywords": ["AI 机场", "流媒体机场", "办公机场"], "color": "blue" },
+  { "slug": "troubleshooting", "name": "问题排查", "icon": "tool", "description": "订阅失败、连接超时、节点不显示与晚高峰变慢的排查步骤。", "keywords": ["机场无法连接", "订阅失败", "Clash 配置错误"], "color": "amber" },
+  { "slug": "deals", "name": "套餐与优惠", "icon": "ticket", "description": "月付价格、优惠码、试用、流量包与长期订阅的成本计算。", "keywords": ["机场优惠码", "机场月付", "高性价比机场"], "color": "teal" },
+  { "slug": "regions", "name": "节点地区", "icon": "map", "description": "香港、日本、新加坡及欧美、东南亚节点的用途与选择方法。", "keywords": ["香港机场", "日本机场", "美国机场"], "color": "violet" }
+]
