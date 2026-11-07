@@ -23,4 +23,4 @@ Windows 可优先考虑 Clash Verge Rev、Clash Meta 或 v2rayN；Mac 可选择 
 
 ## 机场选择仍然优先于客户端选择
 
-客户端只是连接工具，不能把不稳定的线路变成稳定线路。选择机场时先确认节点覆盖、协议、设备数、流量倍率和订阅格式，再选择适合自己设备的客户端。你可以从[光年梯测评](/posts/guangnianti-review/)或[品牌库](/brands/)开始。
+客户端只是连接工具，不能把不稳定的线路变成稳定线路。选择机场时先确认节点覆盖、协议、设备数、流量倍率和订阅格式，再选择适合自己设备的客户端。你可以从[光年梯测评](/posts/guangnianti-review/)或[机场推荐](/airport-recommendation/)开始。

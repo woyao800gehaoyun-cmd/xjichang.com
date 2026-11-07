@@ -1,6 +1,6 @@
 [
   { "slug": "choose", "name": "机场选择", "icon": "compass", "description": "从预算、月付套餐到可靠性，建立自己的选择标准。", "keywords": ["机场推荐", "机场排行", "新手指南"], "color": "violet" },
-  { "slug": "reviews", "name": "品牌测评", "icon": "layers", "description": "逐项拆解四家机场的价格、线路、流量与优惠信息。", "keywords": ["机场测评", "品牌库", "机场怎么样"], "color": "blue" },
+  { "slug": "reviews", "name": "品牌测评", "icon": "layers", "description": "逐项拆解四家机场的价格、线路、流量与优惠信息。", "keywords": ["机场测评", "机场品牌", "机场怎么样"], "color": "blue" },
   { "slug": "clients", "name": "客户端教程", "icon": "monitor", "description": "Windows、Mac、Android 和 iOS 的订阅配置与使用方法。", "keywords": ["Clash", "Shadowrocket", "sing-box"], "color": "teal" },
   { "slug": "network", "name": "线路与协议", "icon": "network", "description": "读懂 IEPL、IPLC、中转、直连、协议与流量倍率。", "keywords": ["专线机场", "节点倍率", "原生 IP"], "color": "amber" },
   { "slug": "scenes", "name": "使用场景", "icon": "globe", "description": "围绕 AI、流媒体、游戏、远程办公和跨境业务做选择。", "keywords": ["AI 机场", "流媒体机场", "办公机场"], "color": "blue" },
