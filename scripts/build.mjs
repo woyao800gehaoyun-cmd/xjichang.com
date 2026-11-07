@@ -49,7 +49,9 @@ const posts = (await Promise.all(files.map(async (file) => {
 
 const nav = [
   ['/', '首页'], ['/airport-recommendation/', '机场推荐'], ['/posts/', '博客文章'],
-  ['/topics/', '专题目录'], ['/tutorials/', '教程中心'], ['/tools/', '工具箱'], ['/about/', '关于本站']
+  ['/topics/', '专题目录'], ['/tutorials/', '教程中心'], ['/tools/', '工具箱'], ['/about/', '关于本站'],
+  ['/compare/', '横向对比'], ['/questions/', '问题库'], ['/ai-tools/', 'AI 工具'],
+  ['/shared-id/', '共享 ID'], ['/alerts/', '跑路预警'], ['/community/', '订阅更新']
 ];
 const icon = { compass: '✦', layers: '◈', monitor: '▣', network: '⌁', globe: '◎', tool: '⌁', ticket: '◇', map: '⌖' };
 
@@ -60,7 +62,6 @@ function header(active = '/') {
       <a class="brand" href="/" aria-label="选机场首页"><img src="/mark.svg" alt="" width="38" height="38"><span>选机场</span><small>.com</small></a>
       <nav class="desktop-nav" aria-label="主导航">${links}</nav>
       <div class="header-tools"><button class="search-trigger" data-search-open aria-label="搜索文章"><span class="search-glyph">⌕</span><span>搜索</span><kbd>Ctrl K</kbd></button><button class="theme-toggle" data-theme-toggle aria-label="切换深色主题" aria-pressed="false">◐</button><button class="menu-trigger" data-menu-open aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">☰</button></div>
-      <div class="utility-nav"><nav aria-label="实用栏目"><a href="/compare/">横向对比</a><a href="/questions/">问题库</a><a href="/ai-tools/">AI 工具</a><a href="/shared-id/" class="utility-blue">共享 ID</a><a href="/alerts/" class="utility-pink">跑路预警</a></nav><a class="community-link" href="/community/">订阅更新 ↗</a></div>
     </div>
     <div class="mobile-menu" id="mobile-menu" data-mobile-menu><nav>${links}</nav><button class="mobile-search" data-search-open>⌕ 搜索文章与指南</button></div>
   </header>`;
@@ -112,7 +113,7 @@ await writePage('/', shell({ title: '2026 机场推荐、测评与客户端指�
 const compareRows = brands.map((brand) => `<tr><th><span class="table-brand"><span class="brand-avatar avatar-${brand.color}">${esc(brand.initial)}</span>${esc(brand.name)}</span>${brand.featured ? badge('本站主推', 'violet') : ''}</th><td>${brand.price ? `¥${brand.price}/月` : '待确认'}</td><td>${brand.traffic ? `${brand.traffic}GB` : '待确认'}</td><td>${esc(brand.line)}</td><td><button class="coupon" data-copy="${esc(brand.coupon || '暂无优惠码')}">${esc(brand.coupon || '暂无')} <span>复制</span></button></td><td><a href="/posts/${brand.slug}-review/">测评 →</a></td></tr>`).join('');
 const compareBody = `<section class="page-hero section"><div class="container page-hero-inner"><div><span class="eyebrow">AIRPORT DIRECTORY</span><h1>机场套餐横向对比</h1><p>四家收录品牌的价格、流量、线路与优惠码集中展示。已确认和待核实信息分开呈现。</p></div><div class="page-hero-mark">04<small>brands</small></div></div></section><section class="section section-tight"><div class="container"><div class="notice"><span>i</span><p>本站推荐依据为已提供的套餐信息，不代表速度、晚高峰、流媒体或 AI 解锁实测排名。节点、协议、倍率、设备数和退款政策请在购买前确认。</p></div><div class="compare-table-wrap"><table class="compare-table"><thead><tr><th>品牌</th><th>月付</th><th>流量</th><th>线路</th><th>优惠码</th><th>文章</th></tr></thead><tbody>${compareRows}</tbody></table></div></div></section><section class="section section-tint"><div class="container"><div class="section-heading"><div><span class="eyebrow">DETAILED REVIEWS</span><h2>逐篇阅读</h2><p>从配置分析开始，购买前再自行验证。</p></div></div><div class="brand-grid">${brands.map((brand) => brandCard(brand, true)).join('')}</div></div></section>`;
 const filteredCompare = compareBody.replace('<div class="compare-table-wrap">', '<div class="compare-controls"><label for="compare-search">筛选品牌、线路或价格</label><input id="compare-search" data-compare-search placeholder="例如：IEPL、12、光年梯"><span data-compare-status aria-live="polite">4 个品牌</span></div><div class="compare-table-wrap">');
-await writePage('/compare/', shell({ title: '机场横向对比：价格、流量与线路', description: '把四家机场放在同一张表里比较，查看月付、标称流量、IEPL/IPLC/直连线路和优惠码。', path: '/compare/', active: '/airport-recommendation/', body: filteredCompare }));
+await writePage('/compare/', shell({ title: '机场横向对比：价格、流量与线路', description: '把四家机场放在同一张表里比较，查看月付、标称流量、IEPL/IPLC/直连线路和优惠码。', path: '/compare/', active: '/compare/', body: filteredCompare }));
 
 const recommendedBrands = [...brands].sort((a, b) => a.recommendationRank - b.recommendationRank);
 const recommendationRows = recommendedBrands.map((brand) => `<tr data-brand="${esc(brand.slug)}"${brand.featured ? ' class="recommendation-primary"' : ''}><th scope="row"><div class="recommendation-brand"><span class="recommendation-rank" aria-label="第 ${brand.recommendationRank} 位">${brand.recommendationRank}</span><div><a href="#recommendation-${brand.slug}">${esc(brand.name)}</a>${brand.featured ? badge('本站主推', 'violet') : ''}</div></div></th><td><a class="recommendation-official" href="${esc(brand.url)}" target="_blank" rel="sponsored nofollow noopener">直达官网 <span>↗</span></a></td><td class="recommendation-plan"><strong>¥${brand.price}<small> / 月</small></strong><span>${brand.traffic ? `${brand.traffic}GB / 月` : '流量待确认'}</span></td><td><span class="recommendation-line">${esc(brand.line)}</span></td><td><button class="coupon" data-copy="${esc(brand.coupon || '暂无优惠码')}" aria-label="${brand.coupon ? `复制${esc(brand.name)}优惠码 ${esc(brand.coupon)}` : `${esc(brand.name)}暂无优惠码`}">${esc(brand.coupon || '暂无')} <span>复制</span></button></td><td><a class="recommendation-review" href="/posts/${brand.slug}-review/">查看测评 <span>→</span></a></td></tr>`).join('');
